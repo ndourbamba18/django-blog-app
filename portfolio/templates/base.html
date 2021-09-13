@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111" />
+    <!-- -->
+    {% if title %}
+    <title>Portfolio - {{ ttitle }}</title>
+    {% else %}
+    <title>Portfolio</title>
+    {% endif %}
+    <script>
+        window.console = window.console || function(t) {};
+    </script>
+
+
+
+    <script>
+        if (document.location.search.match(/type=embed/gi)) {
+            window.parent.postMessage("resize", "*");
+        }
+    </script>
+
+
+</head>
+
+<body translate="no">
+    <div class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <div class="navbar-header">
+                        <button class="navbar-toggle" data-target="#mobile_menu" data-toggle="collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+                        <a href="{% url 'index' %}" class="navbar-brand">GROUP.COM</a>
+                    </div>
+
+                    <div class="navbar-collapse collapse" id="mobile_menu">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="{% url 'index' %}">Home</a></li>
+                            <li>
+                                <a href="{% url 'about' %}">About Us</a>
+                            </li>
+                            <li><a href="{% url 'contact-form' %}">Contact Us</a></li>
+                            <li><a href="{% url 'home' %}">Blog</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav">
+                            <li>
+                                <form action="" class="navbar-form">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <input type="search" name="search" id="" placeholder="Search Anything Here..." class="form-control">
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+                                        </div>
+                                    </div>
+                                </form>
+                            </li>
+                        </ul>
+                        {% if user.is_authenticated %}
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="#"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+                            <li><a>Hi, <span class="glyphicon glyphicon-user"> {{ user.username }}</span></a></li>
+                            <li><a href="{% url 'logout' %}">Log Out</a></li>
+                        </ul>
+                        {% else %}
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="#"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+                            <li><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-log-in"></span> Login / Sign Up <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{% url 'login' %}">Login</a></li>
+                                    <li><a href="{% url 'register' %}">Sign Up</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div role="main" class="container">
+        {% if messages %}
+        <!---->
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+        <!---->
+        {% endif %}
+        <!---->
+        {% block content %} {% endblock %}
+
+
+    </div>
+    <footer class="site-footer" itemscope itemtype="https://schema.org/WPFooter">
+        <div class="wrap">
+            <p style="text-align: center;">&#x000A9;&nbsp;2021 &middot; <a href="http://localhost:8000/portfolio/">GROUP.COM</a> &middot; GROUP.COM</p>
+        </div>
+    </footer>
+
+
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cpwebassets.codepen.io/assets/editor/iframe/iframeRefreshCSS-4793b73c6332f7f14a9b6bba5d5e62748e9d1bd0b5c52d7af6376f3d1c625d7e.js"></script>
+</body>
+
+</html>
